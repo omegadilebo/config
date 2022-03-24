@@ -2,6 +2,7 @@
   description = "Omega's NixOS environment.";
 
   inputs = {
+    nix.url = "github:kreisys/nix/goodnix-maybe-dont-functor";
     nixos.url = "github:nixos/nixpkgs/release-21.11";
     digga = {
       url = "github:divnix/digga";
@@ -19,6 +20,7 @@
     digga,
     home,
     deploy,
+    ...
   }:
     digga.lib.mkFlake {
       inherit self inputs;

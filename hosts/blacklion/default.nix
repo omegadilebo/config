@@ -4,6 +4,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -84,6 +85,7 @@
     kakoune
   ];
   nix = {
+    package = inputs.nix.packages.${pkgs.system}.nix;
     gc.automatic = true;
     gc.options = "--max-freed $((10 * 1024 * 1024))";
     optimise.automatic = true;
