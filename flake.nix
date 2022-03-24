@@ -10,6 +10,7 @@
     # home.url = "github:nix-community/home-manager/release-21.11";
     home.url = "github:blaggacao/home-manager/release-21.11-with-nix-profile";
     home.inputs.nixpkgs.follows = "nixos";
+    deploy.follows = "digga/deploy";
   };
 
   outputs = inputs @ {
@@ -17,9 +18,22 @@
     nixos,
     digga,
     home,
+    deploy,
   }:
     digga.lib.mkFlake {
       inherit self inputs;
+
+      deploy.nodes =
+        digga.lib.mkDeployNodes self.nixosConfigurations
+        {
+          blacklion = {
+            profilesOrder = ["system" "omega"];
+            profiles.omega = {
+              user = "omega";
+              path = deploy.lib.x86_64-linux.activate.home-manager self.homeConfigurationsPortable.x86_64-linux.omega;
+            };
+          };
+        };
 
       channels.nixos = {};
 
