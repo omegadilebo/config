@@ -7,7 +7,8 @@
       url = "github:divnix/digga";
       inputs.nixpkgs.follows = "nixos";
     };
-    home.url = "github:nix-community/home-manager";
+    # home.url = "github:nix-community/home-manager/release-21.11";
+    home.url = "github:blaggacao/home-manager/release-21.11-with-nix-profile";
     home.inputs.nixpkgs.follows = "nixos";
   };
 
